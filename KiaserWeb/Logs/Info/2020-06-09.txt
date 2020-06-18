@@ -1,0 +1,4 @@
+2020-06-09 17:57:43.7724 Info  开始.. RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start => LogHelper.WriteInfo
+2020-06-09 17:57:45.4864 Info 我是控制器 <no type>.lambda_method => HomeController.Index => LogHelper.WriteInfo
+2020-06-09 17:57:50.0477 Info 我是控制器 <no type>.lambda_method => HomeController.Index => LogHelper.WriteInfo
+2020-06-09 17:57:51.2478 Info 我是控制器 <no type>.lambda_method => HomeController.Index => LogHelper.WriteInfo

@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityModel\ClassData.cs" />
+    <Compile Include="EntityModel\Menu.cs" />
     <Compile Include="EntityModel\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ClassDataViewModel.cs" />

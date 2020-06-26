@@ -23,5 +23,6 @@ namespace KiaserDLL
 
         public DbSet<Student> Student { get; set; }
         public DbSet<ClassData> ClassData { get; set; }
+        public DbSet<Menu> MenuP { get; set; }
     }
 }

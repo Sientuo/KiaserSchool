@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -57,6 +58,52 @@ namespace KiaserWeb
         protected void Application_EndRequest()
         {
             MiniProfiler.Stop();
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception ex = Server.GetLastError();
+            //写入异常
+            LogHelper.WriteError(ex.Message + "--" + ex.StackTrace);
+            var ajaxRequest = HttpContext.Current.Request.Headers["X-Requested-With"];
+            HttpContext.Current.Server.ClearError();
+            if (ajaxRequest.ToStr().Equals("XMLHttpRequest"))
+            {
+                if (ex is HttpRequestValidationException)
+                {
+                    HttpContext.Current.Response.StatusCode = 600;
+                }
+                else
+                {
+                    if (ex is HttpException)
+                    {
+                        HttpException httpex = (HttpException)ex;
+                        if (httpex.GetHttpCode() > 0)
+                        {
+                            HttpContext.Current.Response.StatusCode = httpex.GetHttpCode();
+                        }
+                    }
+                    else
+                    {
+                        HttpContext.Current.Response.StatusCode = 500;
+                    }
+                }
+            }
+            else
+            {
+                if (ex is HttpException)
+                {
+                    HttpException httpex = (HttpException)ex;
+                    if (httpex.GetHttpCode() > 0)
+                    {
+                        Response.Redirect("~/Error/Error_404", true);
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Error/Error_500", true);
+                }
+            }
         }
     }
 }

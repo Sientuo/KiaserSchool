@@ -8,7 +8,7 @@ namespace KiaserModel.ViewModel
 {
     public class ClassDataViewModel
     {
-        public string id { get; set; }
+        public string Id { get; set; }
         public string ClassName { get; set; }
         public string TeacherId { get; set; }
         public string CreateBy { get; set; }
@@ -17,7 +17,7 @@ namespace KiaserModel.ViewModel
 
     public class ClassDataEditModel
     {
-        public string id { get; set; }
+        public string Id { get; set; }
         public string ClassName { get; set; }
         public string TeacherId { get; set; }
         public string CreateBy { get; set; }

@@ -24,11 +24,11 @@ namespace KiaserDLL
         {
 
             var data = from b in db.Set<Student>()
-                       join c in db.Set<ClassData>() on b.ClassId equals c.id into kk
+                       join c in db.Set<ClassData>() on b.ClassId equals c.Id into kk
                        from k in kk.DefaultIfEmpty()
                        select new StudentEditModel
                        {
-                           id = b.id,
+                           id = b.Id,
                            SUserCode = b.SUserCode,
                            SName = b.SName,
                            Sex = b.Sex,

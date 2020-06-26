@@ -8,7 +8,7 @@ namespace KiaserModel.EntityModel
 {
     public class Student
     {
-        public string id { get; set; }
+        public string Id { get; set; }
         public string SUserCode { get; set; }
         public string SName { get; set; }
         public string ClassId { get; set; }

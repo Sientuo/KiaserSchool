@@ -51,21 +51,10 @@
     <Compile Include="BaseDLL.cs" />
     <Compile Include="DbContextFactory.cs" />
     <Compile Include="KiaserDbContext.cs" />
-    <Compile Include="Migrations\202006260416280_initialCreate.cs" />
-    <Compile Include="Migrations\202006260416280_initialCreate.Designer.cs">
-      <DependentUpon>202006260416280_initialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006260904236_123.cs" />
-    <Compile Include="Migrations\202006260904236_123.Designer.cs">
-      <DependentUpon>202006260904236_123.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006260913275_resetId.cs" />
-    <Compile Include="Migrations\202006260913275_resetId.Designer.cs">
-      <DependentUpon>202006260913275_resetId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006261025463_addmenuUrl.cs" />
-    <Compile Include="Migrations\202006261025463_addmenuUrl.Designer.cs">
-      <DependentUpon>202006261025463_addmenuUrl.cs</DependentUpon>
+    <Compile Include="MenuDLL.cs" />
+    <Compile Include="Migrations\202006271326449_addtable.cs" />
+    <Compile Include="Migrations\202006271326449_addtable.Designer.cs">
+      <DependentUpon>202006271326449_addtable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,17 +79,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006260416280_initialCreate.resx">
-      <DependentUpon>202006260416280_initialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006260904236_123.resx">
-      <DependentUpon>202006260904236_123.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006260913275_resetId.resx">
-      <DependentUpon>202006260913275_resetId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006261025463_addmenuUrl.resx">
-      <DependentUpon>202006261025463_addmenuUrl.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006271326449_addtable.resx">
+      <DependentUpon>202006271326449_addtable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

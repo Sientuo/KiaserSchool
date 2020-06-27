@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseDLL.cs" />
+    <Compile Include="IMenuDLL.cs" />
     <Compile Include="IStudentDLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

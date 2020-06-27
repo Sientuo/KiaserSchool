@@ -4,38 +4,111 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    <title>- - Kiaser</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        html, body, .base {
+            height: 100%;
+            width: 100%;
+            padding-bottom: 2px;
+            padding-top: 5px;
+        }
+
+        #header {
+            height: 6%
+        }
+
+        #nav {
+            margin-top: 30px;
+            height: 95%;
+            width: 240px;
+            background-color: #eeeeee;
+            width: 200px;
+            float: left;
+            padding: 2px;
+        }
+
+        #section {
+            margin-top: 30px;
+            height: 95%;
+            width: 85%;
+            float: left;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("应用程序名称", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                    <li>@Html.ActionLink("关于", "About", "Home")</li>
-                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
-                </ul>
+    <div class="base">
+        <div id="header" class="navbar-inverse navbar-fixed-top" style="width:100%">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("应用程序名称", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("主页", "Index", "Home")</li>
+                        <li>@Html.ActionLink("关于", "About", "Home")</li>
+                        <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
-        </footer>
+
+        <div id="nav">
+            <el-row class="tac">
+                <el-col :span="24">
+                    <el-menu class="el-menu-vertical-demo" v-on:open="handleOpen" v-on:close="handleClose" default-active="2">
+                        <menutree :data="menu_data"></menutree>
+                        @*<el-submenu index="1">
+                            <template slot="title">
+                                <i class="el-icon-location"></i>
+                                <span>导航一</span>
+                            </template>
+                            <el-submenu index="1-4">
+                                <template slot="title">
+                                    选项4
+                                </template>
+                                <el-menu-item index="1-4-1">选项1</el-menu-item>
+                            </el-submenu>
+                        </el-submenu>
+                    </el-menu>*@
+                </el-col>
+            </el-row>
+        </div>
+        <div class="container body-content" id="section">
+            @RenderBody()
+        </div>
     </div>
 
+    <template id="menutree">
+        <div>
+            <div v-for="menu in data" :key="menu.index">
+                <el-submenu :index="menu.index" v-if="menu.children">
+                    <template slot="title">
+                        @*<i class="el-icon-location"></i>*@
+                        <span>{{menu.name}}</span>
+                    </template>
+                     <menutree :data="menu.children"></menutree>
+                </el-submenu>
+                <el-menu-item v-else :index="menu.index">
+                    <span slot="title">{{menu.name}}</span>
+                </el-menu-item>
+            </div>
+        </div>
+       
+    </template>
+    @*<div id="footer">
+            <footer>
+                <p>&copy; @DateTime.Now.Year - 学校系统管理</p>
+            </footer>
+        </div>*@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/vue")
     @Scripts.Render("~/bundles/bootstrap")
@@ -43,5 +116,60 @@
 
     @using StackExchange.Profiling;
     @MiniProfiler.RenderIncludes()
+
+    <script>
+
+
+        var app = new Vue({
+            el: "#nav",
+            data: {
+                menu_data: [{
+                    "index": "1",
+                    "name": "用户管理",
+                    "children": [{
+                        "index": "1-2",
+                        "name": "用户列表",
+                        "children": [{
+                            "index": "1-2-1",
+                            "name": "用户列表查询",
+                            "children": [{
+                                "index": "1-2-1-1",
+                                "name": "用户列表查询"
+                            }]
+                        }]
+                    }]
+                }, {
+                    "index": "2",
+                    "name": "角色管理"
+                }, {
+                    "index": "3",
+                    "name": "宿舍管理"
+                }, {
+                    "index": "4",
+                    "name": "系统管理"
+                }],
+
+            },
+            methods: {
+                handleOpen(key, keyPath) {
+                    console.log(key, keyPath);
+                },
+                handleClose(key, keyPath) {
+                    console.log(key, keyPath);
+                }
+
+
+            },
+            components: {
+                menutree: {
+                    template: '#menutree',
+                    props: ['data'],
+                    name: 'menutree'
+                }
+            }
+
+        });
+
+    </script>
 </body>
 </html>

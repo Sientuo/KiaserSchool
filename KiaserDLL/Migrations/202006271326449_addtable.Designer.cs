@@ -7,13 +7,13 @@ namespace KiaserDLL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class resetId : IMigrationMetadata
+    public sealed partial class addtable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(resetId));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addtable));
         
         string IMigrationMetadata.Id
         {
-            get { return "202006260913275_resetId"; }
+            get { return "202006271326449_addtable"; }
         }
         
         string IMigrationMetadata.Source

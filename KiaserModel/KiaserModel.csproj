@@ -55,6 +55,7 @@
     <Compile Include="EntityModel\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ClassDataViewModel.cs" />
+    <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\Pagger.cs" />
     <Compile Include="ViewModel\StudentViewModel.cs" />
   </ItemGroup>

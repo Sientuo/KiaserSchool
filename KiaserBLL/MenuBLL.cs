@@ -1,6 +1,7 @@
 ﻿using KiaserIBLL;
 using KiaserIDLL;
 using KiaserModel.EntityModel;
+using KiaserModel.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,23 @@ namespace KiaserBLL
 
 
         //查询菜单树
-        public void GetDefaultMenuTree()
+        public IQueryable<MenuTreeModel> GetDefaultMenuTree()
         {
-           
+            var data = MenuDLL.GetListBy(c => c != null).OrderBy(c => c.PId);
+            if (data != null)
+            {
+                var temp = from b in data
+                           select new MenuTreeModel
+                           {
+                               Id = b.Id,
+                               MenuCode = b.MenuCode,
+                               PId = b.PId,
+                               MenuName = b.MenuName,
+                               MenuUrl = b.MenuUrl
+                           };
+                return temp;
+            }
+            return null;
         }
     }
 }

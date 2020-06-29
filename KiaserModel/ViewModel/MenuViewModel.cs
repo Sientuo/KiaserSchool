@@ -21,8 +21,6 @@ namespace KiaserModel.ViewModel
 
         public string MenuCode { get; set; }
 
-        public string Index { get; set; }
-
         public string MenuUrl { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using KiaserModel.EntityModel;
+using KiaserModel.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace KiaserIBLL
 {
     public interface IMenuBLL:IBaseBLL<Menu>
     {
+        IQueryable<MenuTreeModel> GetDefaultMenuTree();
     }
 }

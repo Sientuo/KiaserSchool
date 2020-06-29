@@ -65,20 +65,7 @@
             <el-row class="tac">
                 <el-col :span="24">
                     <el-menu class="el-menu-vertical-demo" v-on:open="handleOpen" v-on:close="handleClose" default-active="2">
-                        <menutree :data="menu_data"></menutree>
-                        @*<el-submenu index="1">
-                            <template slot="title">
-                                <i class="el-icon-location"></i>
-                                <span>导航一</span>
-                            </template>
-                            <el-submenu index="1-4">
-                                <template slot="title">
-                                    选项4
-                                </template>
-                                <el-menu-item index="1-4-1">选项1</el-menu-item>
-                            </el-submenu>
-                        </el-submenu>
-                    </el-menu>*@
+                        <menutree :data="menudata"></menutree>
                 </el-col>
             </el-row>
         </div>
@@ -147,8 +134,11 @@
                 }, {
                     "index": "4",
                     "name": "系统管理"
-                }],
-
+                    }],
+                menudata:[]
+            },
+            mounted: function(){
+                this.getmenudata();
             },
             methods: {
                 handleOpen(key, keyPath) {
@@ -156,8 +146,21 @@
                 },
                 handleClose(key, keyPath) {
                     console.log(key, keyPath);
-                }
+                },
+                getmenudata: function () {
+                    debugger
+                    $.post("../Home/GetTreeData", "", function (data) {
+                        //调用
+                        var dta = FlatToNested(data, {
+                            idProperty: 'Id',            //唯一的节点标识符。
+                            nameProperty: 'MenuName',         //节点的名称。
+                            parentProperty: 'PId',  //可以找到父节点链接的属性的名称。
+                            childrenProperty: 'Son'      //将存储子节点的属性的名称。
+                        });
+                        this.menudata = dta;
+                    },"JSON");
 
+                }
 
             },
             components: {
@@ -170,6 +173,28 @@
 
         });
 
+
+        function FlatToNested(data, option) {
+            debugger
+            option = option || {};
+            let idProperty = option.idProperty || 'Id';
+            let parentProperty = option.parentProperty || 'PId';
+            let childrenProperty = option.childrenProperty || 'children';
+            let res = [],
+                tmpMap = [];
+            for (let i = 0; i < data.length; i++) {
+                tmpMap[data[i][idProperty]] = data[i];
+                if (tmpMap[data[i][parentProperty]] && data[i][idProperty] != data[i][parentProperty]) {
+                    if (!tmpMap[data[i][parentProperty]][childrenProperty])
+                        tmpMap[data[i][parentProperty]][childrenProperty] = [];
+                    tmpMap[data[i][parentProperty]][childrenProperty].push(data[i]);
+                } else {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        }
+       
     </script>
 </body>
 </html>

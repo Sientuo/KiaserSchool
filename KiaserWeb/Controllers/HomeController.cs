@@ -15,9 +15,11 @@ namespace KiaserWeb.Controllers
     public class HomeController : Controller
     {
         public IStudentBLL StuBLL { set; get; }
-        public HomeController(IStudentBLL bLL)
+        public IMenuBLL MenuBLL { set; get; }
+        public HomeController(IStudentBLL bLL,IMenuBLL menuBLL)
         {
             StuBLL = bLL;
+            MenuBLL = menuBLL;
         }
 
         // GET: Home
@@ -38,6 +40,13 @@ namespace KiaserWeb.Controllers
             model.Searchs.TotalCount = tolCount;
             model.Searchs.SetPageInfo();
             return Json(model);
+        }
+
+        //查询菜单
+        public JsonResult GetTreeData()
+        {
+            var data = MenuBLL.GetDefaultMenuTree();
+            return Json(data);
         }
     }
 }

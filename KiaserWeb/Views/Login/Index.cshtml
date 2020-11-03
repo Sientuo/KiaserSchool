@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/index.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="app">
+        <br />
+        <el-row>
+            <el-col :span="4"> -</el-col>
+            <el-col :span="4">
+                <el-input placeholder="请输入账号" v-model="username" clearable></el-input>
+            </el-col>
+        </el-row>
+        <br />
+        <el-row>
+            <el-col :span="4"> -</el-col>
+            <el-col :span="4">
+                <el-input placeholder="请输入密码" v-model="password" clearable></el-input>
+            </el-col>
+        </el-row>
+        <br />
+        <el-row>
+            <el-col :span="4"> -</el-col>
+            <el-button plain>朴素按钮</el-button>
+        </el-row>
+
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Vue/vue.js"></script>
+    <script src="~/Scripts/Vue/z-index.js"></script>
+
+    <script>
+
+        var vue = new Vue({
+            el:"#app",
+            data: {
+                username: '',
+                password:'',
+            },
+            methods: {
+
+
+            }
+
+
+
+        });
+
+
+    </script>
+</body>
+</html>

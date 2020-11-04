@@ -181,6 +181,7 @@
     <Content Include="Views\Error\error_404.cshtml" />
     <Content Include="Views\Error\Error_500.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -191,7 +192,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KiaserIBLL\KiaserIBLL.csproj">

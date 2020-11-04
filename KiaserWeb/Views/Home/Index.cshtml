@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Sientuo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    [v-cloak] {
+        display: none;
+    }
+
+    .el-table::before {
+        z-index: inherit;
+    }
+</style>
+
+<div id="app" v-cloak>
+    <h2>表格</h2>
+    <template>
+        <el-table :data="tableData" border style="width:80%" highlight-current-row v-on:sort-change="handCurrentSort">
+            <el-table-column prop="SUserCode" label="账号" min-width="20%" sortable="custom">
+            </el-table-column>
+            <el-table-column prop="SName" label="姓名" min-width="20%">
+            </el-table-column>
+            <el-table-column prop="Sex" label="性别" min-width="20%">
+                <template scope="scope">
+                    <span v-if="scope.row.Sex=='1'">男</span>
+                    <span v-if="scope.row.Sex=='0'">女</span>
+                </template>
+            </el-table-column>
+            <el-table-column prop="ClassName" label="班级" min-width="20%">
+            </el-table-column>
+            <el-table-column prop="CreateDate" label="日期" min-width="20%" sortable>
+                <template scope="scope">
+                    <span>{{scope.row.CreateDate|FuncDate}}</span>
+                </template>
+            </el-table-column>
+        </el-table>
+    </template>
+    <template>
+        <div class="block">
+            <el-pagination background v-on:size-change="handleSizeChange"
+                           v-on:current-change="handleCurrentChange"
+                           :current-page="pageIndex"
+                           :page-sizes="[10, 20, 30, 40]"
+                           :page-size="pageSize"
+                           layout="total, sizes, prev, pager, next, jumper"
+                           :total="tolCount">
+            </el-pagination>
+        </div>
+    </template>
+</div>
+
+
+@section scripts{
+
+    <script>
+         var vm = new Vue({
+
+             el: "#app",
+             data: {
+                 tableData: [],
+                 pageIndex: 1,
+                 pageSize: 5,
+                 tolCount: 0,
+                 sord:"ascending"
+             },
+             mounted: function () {
+                 this.GetStudentData();
+             },
+             methods: {
+                 GetStudentData: function () {
+                     let vm = this;
+                     $.post("../Home/GerStudentListData", { PageIndex: vm.pageIndex, PageSize: vm.pageSize, Sord: vm.sord }, function (data) {
+                         vm.tableData = data.Students;
+                         vm.tolCount = data.Searchs.TotalCount;
+                     }, "JSON");
+
+                 },
+                 handleSizeChange(val) {
+                     this.pageSize = val;
+                     this.GetStudentData();
+                 },
+                 handleCurrentChange(val) {
+                     this.pageIndex = val;
+                     this.GetStudentData();
+                 },
+                 handCurrentSort(val) {
+                     this.sord = val.order;
+                     this.GetStudentData();
+                 }
+             },
+             filters: {
+                 FuncDate: function (date) {
+                     if (date == null) {
+                         return "--";
+                     }
+                     var meetTime = parseInt(date.replace("/Date(", "").replace(")/", ""));
+                     return new Date(+new Date(meetTime) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+                 }
+             }
+         });
+    </script>
+
+}
+
+

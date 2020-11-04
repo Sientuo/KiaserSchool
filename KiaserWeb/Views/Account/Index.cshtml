@@ -13,7 +13,7 @@
     <style>
         .btn {
            margin-left:150px
-        } 
+        }
     </style>
 </head>
 <body>
@@ -42,8 +42,8 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/Vue/vue.js"></script>
     <script src="~/Scripts/Vue/z-index.js"></script>
-    @*<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>*@
-    <script src="~/Scripts/Vue/axios.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
+    @*<script src="~/Scripts/Vue/axios.js"></script>*@
     <script>
 
         var vue = new Vue({
@@ -69,8 +69,9 @@
                                     UserCode: vm.ruleForm.usercode,
                                     Password: vm.ruleForm.password
                                 })
-                           .then(function (response) {
-                               //console.log(response);
+                                .then(function (response) {
+                                    debugger
+                                    window.location.href = "Home/Index";
                            })
                            .catch(function (error) {
                                //console.log(error);

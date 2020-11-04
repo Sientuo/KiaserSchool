@@ -8,6 +8,8 @@ namespace KiaserModel.ViewModel
 {
     public class UserInfo
     {
+        public string UserCode { get; set; }
+
         /// <summary>
         /// 用户名
         /// </summary>
@@ -15,7 +17,7 @@ namespace KiaserModel.ViewModel
         /// <summary>
         /// 密码
         /// </summary>
-        public string  PassWord { get; set; }
+        public string  Password { get; set; }
         /// <summary>
         /// 是否记住
         /// </summary>

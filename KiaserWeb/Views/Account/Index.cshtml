@@ -1,0 +1,90 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/Content/index.css" rel="stylesheet" />
+    <style>
+        .btn {
+           margin-left:150px
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <br />
+        <br />
+        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px">
+            <el-form-item label="账号：" prop="usercode">
+                <el-col :span="4">
+                    <el-input v-model.number="ruleForm.usercode"></el-input>
+                </el-col>
+            </el-form-item>
+            <el-form-item label="密码：" prop="password">
+                <el-col :span="4">
+                    <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+                </el-col>
+            </el-form-item>
+            <el-form-item>
+                <el-col :span="2" class="btn">
+                    <el-button plain v-on:click="LoginForm('ruleForm')">登陆</el-button>
+                </el-col>
+            </el-form-item>
+        </el-form>
+
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Vue/vue.js"></script>
+    <script src="~/Scripts/Vue/z-index.js"></script>
+    @*<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>*@
+    <script src="~/Scripts/Vue/axios.js"></script>
+    <script>
+
+        var vue = new Vue({
+            el:"#app",
+            data: {
+                ruleForm: {
+                    usercode: '',
+                    password:''
+                },
+                rules: {
+                    usercode: [{ required: true, message: '账号不能为空', trigger: 'blur' }],
+                    password: [{ required: true, message: '密码不能为空', trigger: 'blur' }]
+                }
+            },
+            methods: {
+                LoginForm: function (formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            let vm = this;
+                            //通过验证执行登陆
+                            axios.post('Account/Login',
+                                {
+                                    UserCode: vm.ruleForm.usercode,
+                                    Password: vm.ruleForm.password
+                                })
+                           .then(function (response) {
+                               //console.log(response);
+                           })
+                           .catch(function (error) {
+                               //console.log(error);
+                           })
+                        }
+                    });
+                },
+            }
+
+
+
+        });
+
+
+    </script>
+</body>
+</html>

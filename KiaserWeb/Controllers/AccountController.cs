@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace KiaserWeb.Controllers
 {
-    public class LoginController : Controller
+    public class AccountController : Controller
     {
         // GET: Login
         public ActionResult Index()
@@ -20,7 +20,7 @@ namespace KiaserWeb.Controllers
         public JsonResult Login(UserInfo model)
         {
             //验证用户名-密码
-            if (model != null && !string.IsNullOrEmpty(model.UserName) && !string.IsNullOrEmpty(model.PassWord))
+            if (model != null && !string.IsNullOrEmpty(model.UserName) && !string.IsNullOrEmpty(model.Password))
             {
                 //数据库查询用户名和密码
                 //。。。。

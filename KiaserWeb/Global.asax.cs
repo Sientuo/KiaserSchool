@@ -29,6 +29,8 @@ namespace KiaserWeb
             //注册EF 追踪
             MiniProfilerEF6.Initialize();
 
+            #region AtuoFac 注册
+
             Assembly[] assemblies = Directory.GetFiles(AppDomain.CurrentDomain.RelativeSearchPath, "*.dll").Select(Assembly.LoadFrom).ToArray();
             //创建autofac管理注册类的容器实例
             var builder = new ContainerBuilder();
@@ -47,6 +49,9 @@ namespace KiaserWeb
             var container = builder.Build();
             //下面就是使用MVC的扩展 更改了MVC中的注入方式.
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+
+            #endregion
 
         }
 

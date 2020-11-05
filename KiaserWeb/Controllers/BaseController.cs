@@ -1,5 +1,6 @@
 ﻿using KiaserMid;
 using KiaserModel.ViewModel;
+using KiaserWeb.Filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace KiaserWeb.Controllers
 {
+    [AuthKiaser]
     public class BaseController : Controller
     {
         /// <summary>
@@ -23,29 +25,36 @@ namespace KiaserWeb.Controllers
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            base.OnActionExecuting(filterContext);
 
-            if (Checked)
+            //base.OnActionExecuting(filterContext);
+            var strError = string.Empty;
+            if (filterContext.Controller.ViewData.ModelState.IsValid == false)
             {
-                var userGuid = Request.Cookies["LoginGuid"];
-                if (userGuid == null)
+                var keys = ModelState.Keys;
+                foreach (var key in keys)
                 {
-                    //为空,则跳转到登陆
-                    filterContext.HttpContext.Response.Redirect("/Login/Index");
-                    return;
+                    foreach (var error in ModelState[key].Errors)
+                    {
+                        strError = error.ErrorMessage;
+                        break;
+                    }
                 }
-                //获取当前用户信息
-                var userInfo = (UserInfo)CacheHelper.GetCache(userGuid.ToStr());
-                if (UserInfo == null)
+                filterContext.Result = new JsonResult
                 {
-                    //用户长时间未操作,则跳转到登陆
-                    filterContext.HttpContext.Response.Redirect("/Login/Index");
-                    return;
-                }
-                //重新写入缓存时间
-                CacheHelper.SetCacheDateTime(userGuid.ToStr(), UserInfo, 20 * 60);
+                    Data = new ResponseModel { Code = -1, Msg = strError, Data = null },
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+                return;
             }
         }
 
+        protected override void OnResultExecuting(ResultExecutingContext filterContext)
+        {
+            if (UserInfo == null)
+            {
+                var userGuid = Request.Cookies["LoginGuid"].Value;
+                UserInfo = (UserInfo)CacheHelper.GetCache(userGuid.ToStr());
+            }
+        }
     }
 }

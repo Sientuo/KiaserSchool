@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace KiaserWeb.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public IStudentBLL StuBLL { set; get; }
         public IMenuBLL MenuBLL { set; get; }

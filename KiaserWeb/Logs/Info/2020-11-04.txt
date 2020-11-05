@@ -13,3 +13,4 @@
 2020-11-04 21:48:43.7144 Info  开始.. RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start => LogHelper.WriteInfo
 2020-11-04 21:53:19.6586 Info  开始.. RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start => LogHelper.WriteInfo
 2020-11-04 21:59:37.8493 Info  开始.. RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start => LogHelper.WriteInfo
+2020-11-04 22:24:04.7130 Info  开始.. RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start => LogHelper.WriteInfo

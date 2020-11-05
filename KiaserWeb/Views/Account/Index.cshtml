@@ -46,7 +46,7 @@
     @*<script src="~/Scripts/Vue/axios.js"></script>*@
     <script>
 
-        var vue = new Vue({
+        var vm = new Vue({
             el:"#app",
             data: {
                 ruleForm: {
@@ -66,8 +66,12 @@
                             ////通过验证执行登陆
                             $.post("Account/Login", {
                                 UserCode: vm.ruleForm.usercode,
-                                Password: vm.ruleForm.password}, function (res) {
-                                    alert(res.Code);
+                                Password: vm.ruleForm.password
+                            }, function (res) {
+                                if (res.Code == -1) {
+                                    return vm.$message.error(res.Msg);
+                                }
+                                window.location.href = "Home/Index";    
                             });
 
                            // axios.post('Account/Login',

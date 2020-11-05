@@ -148,7 +148,6 @@
                     console.log(key, keyPath);
                 },
                 getmenudata: function () {
-                    debugger
                     $.post("../Home/GetTreeData", "", function (data) {
                         //调用
                         var dta = FlatToNested(data, {
@@ -175,7 +174,7 @@
 
 
         function FlatToNested(data, option) {
-            debugger
+            
             option = option || {};
             let idProperty = option.idProperty || 'Id';
             let parentProperty = option.parentProperty || 'PId';

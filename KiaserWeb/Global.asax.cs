@@ -27,7 +27,7 @@ namespace KiaserWeb
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //注册EF 追踪
-            MiniProfilerEF6.Initialize();
+            //MiniProfilerEF6.Initialize();
 
             #region AtuoFac 注册
 
@@ -57,12 +57,12 @@ namespace KiaserWeb
 
         protected void Application_BeginRequest()
         {
-            MiniProfiler.Start();
+            //MiniProfiler.Start();
         }
 
         protected void Application_EndRequest()
         {
-            MiniProfiler.Stop();
+            //MiniProfiler.Stop();
         }
 
         protected void Application_Error(object sender, EventArgs e)
@@ -72,6 +72,8 @@ namespace KiaserWeb
             LogHelper.WriteError(ex.Message + "--" + ex.StackTrace);
             var ajaxRequest = HttpContext.Current.Request.Headers["X-Requested-With"];
             HttpContext.Current.Server.ClearError();
+
+           
             if (ajaxRequest.ToStr().Equals("XMLHttpRequest"))
             {
                 if (ex is HttpRequestValidationException)
@@ -80,9 +82,8 @@ namespace KiaserWeb
                 }
                 else
                 {
-                    if (ex is HttpException)
+                    if (ex is HttpException httpex)
                     {
-                        HttpException httpex = (HttpException)ex;
                         if (httpex.GetHttpCode() > 0)
                         {
                             HttpContext.Current.Response.StatusCode = httpex.GetHttpCode();
@@ -96,9 +97,8 @@ namespace KiaserWeb
             }
             else
             {
-                if (ex is HttpException)
+                if (ex is HttpException httpex)
                 {
-                    HttpException httpex = (HttpException)ex;
                     if (httpex.GetHttpCode() > 0)
                     {
                         Response.Redirect("~/Error/Error_404", true);

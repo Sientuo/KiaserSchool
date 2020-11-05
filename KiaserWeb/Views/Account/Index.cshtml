@@ -63,19 +63,26 @@
                     this.$refs[formName].validate((valid) => {
                         if (valid) {
                             let vm = this;
-                            //通过验证执行登陆
-                            axios.post('Account/Login',
-                                {
-                                    UserCode: vm.ruleForm.usercode,
-                                    Password: vm.ruleForm.password
-                                })
-                                .then(function (response) {
-                                    debugger
-                                    window.location.href = "Home/Index";
-                           })
-                           .catch(function (error) {
-                               //console.log(error);
-                           })
+                            ////通过验证执行登陆
+                            $.post("Account/Login", {
+                                UserCode: vm.ruleForm.usercode,
+                                Password: vm.ruleForm.password}, function (res) {
+                                    alert(res.Code);
+                            });
+
+                           // axios.post('Account/Login',
+                           //     {
+                           //         UserCode: vm.ruleForm.usercode,
+                           //         Password: vm.ruleForm.password
+                           //     })
+                           //     .then(function (response) {
+                           //         debugger
+                           //         alert(response);
+                           //         //window.location.href = "Home/Index";
+                           //})
+                           //.catch(function (error) {
+                           //    //console.log(error);
+                           //})
                         }
                     });
                 },

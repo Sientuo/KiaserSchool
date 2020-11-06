@@ -9,16 +9,17 @@ using System.Web.Mvc;
 
 namespace KiaserWeb.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : Controller
     {
         // GET: Login
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult Index()
         {
             return View();
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
+        [Authorize]
         public JsonResult Login(UserInfo userInfo)
         {
             //数据库查询用户名和密码
@@ -26,6 +27,9 @@ namespace KiaserWeb.Controllers
             //将数据存入缓存中
             if (userInfo.UserCode=="12345")
             {
+
+                var aa = User.Identity.Name;
+
                 var cookieKey = Guid.NewGuid().ToString();
                 Request.Cookies["LoginGuid"].Value = cookieKey;
                 //当前用户存入Cache缓存中

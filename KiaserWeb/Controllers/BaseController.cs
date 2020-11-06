@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace KiaserWeb.Controllers
 {
-    [AuthKiaser]
+    //[AuthKiaser]
     public class BaseController : Controller
     {
         /// <summary>
@@ -48,13 +48,13 @@ namespace KiaserWeb.Controllers
             }
         }
 
-        protected override void OnResultExecuting(ResultExecutingContext filterContext)
-        {
-            if (UserInfo == null)
-            {
-                var userGuid = Request.Cookies["LoginGuid"].Value;
-                UserInfo = (UserInfo)CacheHelper.GetCache(userGuid.ToStr());
-            }
-        }
+        //protected override void OnResultExecuting(ResultExecutingContext filterContext)
+        //{
+        //    if (UserInfo == null)
+        //    {
+        //        var userGuid = Request.Cookies["LoginGuid"].Value;
+        //        UserInfo = (UserInfo)CacheHelper.GetCache(userGuid.ToStr());
+        //    }
+        //}
     }
 }

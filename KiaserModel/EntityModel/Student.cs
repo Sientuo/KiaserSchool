@@ -13,6 +13,7 @@ namespace KiaserModel.EntityModel
         [Column(TypeName = "varchar")]
         [MaxLength(length: 50)]
         public string Id { get; set; }
+
         [Column(TypeName = "varchar")]
         [MaxLength(length: 50)]
         public string SUserCode { get; set; }
@@ -22,10 +23,17 @@ namespace KiaserModel.EntityModel
 
         [MaxLength(length: 50)]
         public string ClassId { get; set; }
+
         public int Sex { get; set; }
 
+        [Column(TypeName = "varchar")]
         [MaxLength(length: 50)]
         public string CreateBy { get; set; }
+
         public DateTime? CreateDate { get; set; }
+
+        [Column(TypeName = "varchar")]
+        [MaxLength(length: 50)]
+        public string SPassword { get; set; }
     }
 }

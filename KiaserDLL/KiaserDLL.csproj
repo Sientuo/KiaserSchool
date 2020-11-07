@@ -52,9 +52,9 @@
     <Compile Include="DbContextFactory.cs" />
     <Compile Include="KiaserDbContext.cs" />
     <Compile Include="MenuDLL.cs" />
-    <Compile Include="Migrations\202006271326449_addtable.cs" />
-    <Compile Include="Migrations\202006271326449_addtable.Designer.cs">
-      <DependentUpon>202006271326449_addtable.cs</DependentUpon>
+    <Compile Include="Migrations\202011070837142_InitialCreate.cs" />
+    <Compile Include="Migrations\202011070837142_InitialCreate.Designer.cs">
+      <DependentUpon>202011070837142_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,8 +79,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006271326449_addtable.resx">
-      <DependentUpon>202006271326449_addtable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011070837142_InitialCreate.resx">
+      <DependentUpon>202011070837142_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -64,14 +64,14 @@
                         if (valid) {
                             let vm = this;
                             ////通过验证执行登陆
-                            $.post("Account/Login", {
+                            $.post("../Account/Login", {
                                 UserCode: vm.ruleForm.usercode,
                                 Password: vm.ruleForm.password
                             }, function (res) {
                                 if (res.Code == -1) {
                                     return vm.$message.error(res.Msg);
                                 }
-                                window.location.href = "Home/Index";    
+                                window.location.href = "../Home/Index";    
                             });
 
                            // axios.post('Account/Login',

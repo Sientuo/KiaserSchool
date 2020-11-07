@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace KiaserWeb.Controllers
 {
-    //[AuthKiaser]
+    [AuthKiaser]
     public class BaseController : Controller
     {
         /// <summary>
@@ -25,7 +25,6 @@ namespace KiaserWeb.Controllers
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-
             //base.OnActionExecuting(filterContext);
             var strError = string.Empty;
             if (filterContext.Controller.ViewData.ModelState.IsValid == false)
@@ -47,14 +46,5 @@ namespace KiaserWeb.Controllers
                 return;
             }
         }
-
-        //protected override void OnResultExecuting(ResultExecutingContext filterContext)
-        //{
-        //    if (UserInfo == null)
-        //    {
-        //        var userGuid = Request.Cookies["LoginGuid"].Value;
-        //        UserInfo = (UserInfo)CacheHelper.GetCache(userGuid.ToStr());
-        //    }
-        //}
     }
 }

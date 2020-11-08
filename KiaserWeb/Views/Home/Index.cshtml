@@ -48,6 +48,11 @@
             </el-pagination>
         </div>
     </template>
+
+    <br />
+    <el-row>
+        <el-button plain v-on:click="GetUserMes">朴素按钮</el-button>
+    </el-row>
 </div>
 
 
@@ -87,6 +92,11 @@
                  handCurrentSort(val) {
                      this.sord = val.order;
                      this.GetStudentData();
+                 },
+                 GetUserMes: function () {
+                     $.post("../Home/GetUserMes", "", function (res) {
+                         alert(res);
+                     });
                  }
              },
              filters: {

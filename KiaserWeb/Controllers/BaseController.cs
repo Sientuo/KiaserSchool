@@ -1,11 +1,14 @@
 ﻿using KiaserMid;
+using KiaserModel.EntityModel;
 using KiaserModel.ViewModel;
 using KiaserWeb.Filter;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace KiaserWeb.Controllers
 {
@@ -20,7 +23,19 @@ namespace KiaserWeb.Controllers
         /// <summary>
         /// 用户类型
         /// </summary>
-        public UserInfo UserInfo { get; set; }
+        private Student _userInfo;
+        public Student UserInfo {
+            get
+            {
+                if (HttpContext.User.Identity.IsAuthenticated)
+                {
+                    _userInfo = JsonConvert.DeserializeObject<Student>(((FormsIdentity)User.Identity).Ticket.UserData);
+                    //var authTicket = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value);
+                    //_userInfo = JsonConvert.DeserializeObject<Student>(authTicket.UserData);
+                }
+                return _userInfo;
+            }
+        }
 
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

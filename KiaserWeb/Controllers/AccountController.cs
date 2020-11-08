@@ -21,6 +21,7 @@ namespace KiaserWeb.Controllers
             StuBLL = bLL;
         }
 
+
         [AllowAnonymous]
         public ActionResult Index()
         {
@@ -43,23 +44,27 @@ namespace KiaserWeb.Controllers
                 return Json(new ResponseModel { Code = -1, Msg = "密码错误" });
             }
             //构造用户信息
-            user.SPassword = string.Empty;
+            user.SPassword = string.Empty; 
             var jsonUser = JsonConvert.SerializeObject(user);
 
             //签名存储用户信息
+            FormsAuthentication.SetAuthCookie(userInfo.UserCode, false, FormsAuthentication.FormsCookiePath);
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, user.SUserCode, DateTime.Now, DateTime.Now.AddHours(2), false, jsonUser);
             string hashTicket = FormsAuthentication.Encrypt(ticket);
-
-            HttpCookie httpCookie = HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
-            if (httpCookie == null)
+            HttpCookie httpCookie = new HttpCookie(FormsAuthentication.FormsCookieName, hashTicket)
             {
-                httpCookie = new HttpCookie(FormsAuthentication.FormsCookieName, hashTicket)
-                {
-                    Expires = DateTime.Now.AddMinutes(20)
-                };
-                Response.Cookies.Add(httpCookie);
-            }            
+                Expires = DateTime.Now.AddMinutes(20)
+            };
+            HttpContext.Response.Cookies.Add(httpCookie);
+
             return Json(new ResponseModel { Code = 0, Msg = "登录成功" });
         }
+
+        public ActionResult LogOut()
+        {
+            string strUserData = ((FormsIdentity)HttpContext.User.Identity).Ticket.UserData;
+            FormsAuthentication.SignOut();
+            return View("Index");
+        } 
     }
 }

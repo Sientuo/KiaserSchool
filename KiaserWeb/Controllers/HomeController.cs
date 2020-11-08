@@ -48,5 +48,11 @@ namespace KiaserWeb.Controllers
             var data = MenuBLL.GetDefaultMenuTree();
             return Json(data);
         }
+
+        //
+        public JsonResult GetUserMes()
+        {
+            return Json(UserInfo);
+        }
     }
 }
